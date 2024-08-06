@@ -1,5 +1,6 @@
 import cmd
 import os
+from srcv2 import tokenize
 
 
 RESET = "\033[0m"
@@ -51,6 +52,8 @@ class ComputorShell(cmd.Cmd):
     def default(self, line):
         if line == "EOF":
             return True
+        print(tokenize(line))
+        return
         try:
             var_name, value = map(str.strip, line.lower().split("=", 1))
             assert (

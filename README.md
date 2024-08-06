@@ -4,6 +4,7 @@
 
 - [ ] tokenizer + tests
 - [ ] remove v1/v2 separation (rename `srcv1`/`srcv2` to `src`)
+- [ ] `test_computorvx.py` -> `tests` folder with more files
 
 ## general presentation
 

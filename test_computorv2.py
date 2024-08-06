@@ -1,3 +1,7 @@
+from srcv2 import tokenize
+from srcv2.types import Rational
+
+
 """
 subject examples:
 
@@ -57,5 +61,12 @@ funA(funB(x)) = ?
 """
 
 
-def test_true():
-    assert True
+def test_rational():
+    assert Rational(0, 1) == Rational(0, 1)
+    assert Rational(21, 14) == Rational(3, 2)
+    assert Rational(21, 14).numer == 3
+    assert Rational(21, 14).denom == 2
+
+
+def test_tokenize():
+    assert tokenize("varA = 2") == ["varA", "=", Rational(2, 1)]
