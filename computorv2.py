@@ -12,7 +12,7 @@ PROMPT_END_IGNORE = "\002"
 
 
 class ComputorShell(cmd.Cmd):
-    prompt = f"{PROMPT_START_IGNORE}{BOLD}{CYAN}{PROMPT_END_IGNORE}computorv2>{PROMPT_START_IGNORE}{RESET}{PROMPT_END_IGNORE} "
+    prompt = f"{PROMPT_START_IGNORE}{BOLD}{CYAN}{PROMPT_END_IGNORE}>{PROMPT_START_IGNORE}{RESET}{PROMPT_END_IGNORE} "
 
     def __init__(self):
         super().__init__()
@@ -48,11 +48,11 @@ class ComputorShell(cmd.Cmd):
         else:
             print("No variables in memory")
 
-    def default(self, arg):
-        if arg == "EOF":
+    def default(self, line):
+        if line == "EOF":
             return True
         try:
-            var_name, value = map(str.strip, arg.lower().split("=", 1))
+            var_name, value = map(str.strip, line.lower().split("=", 1))
             assert (
                 all(map(str.isalpha, var_name))
                 and len(var_name) >= 1

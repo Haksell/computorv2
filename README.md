@@ -2,6 +2,7 @@
 
 ## todo
 
+- [ ] tokenizer + tests
 - [ ] remove v1/v2 separation (rename `srcv1`/`srcv2` to `src`)
 
 ## general presentation
