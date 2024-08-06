@@ -42,10 +42,11 @@ class ComputorShell(cmd.Cmd):
 
     def do_vars(self, _):
         """vars : list all variables and their values"""
-        if not self.variables:
+        if self.variables:
+            for k, v in sorted(self.variables.items()):
+                print(f"{k} = {v}")
+        else:
             print("No variables in memory")
-        for k, v in sorted(self.variables.items()):
-            print(f"{k} = {v}")
 
     def default(self, arg):
         if arg == "EOF":
