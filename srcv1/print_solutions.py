@@ -1,6 +1,6 @@
 from fractions import Fraction
-from src.solve import solve_second_degree, solve_third_degree
-from src.utils import get_degree, is_integer
+from srcv1.solve import solve_second_degree, solve_third_degree
+from srcv1.utils import get_degree, is_integer
 
 
 PRECISION = 6

@@ -1,6 +1,6 @@
-from src.print_solutions import print_solutions
-from src.parse_equation import parse_equation
-from src.utils import ft_assert, get_degree
+from srcv1.print_solutions import print_solutions
+from srcv1.parse_equation import parse_equation
+from srcv1.utils import ft_assert, get_degree
 import sys
 
 

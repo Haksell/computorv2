@@ -4,10 +4,10 @@ from decimal import Decimal
 from fractions import Fraction
 from math import sqrt
 import pytest
-from src.parse_equation import parse_equation
-from src.print_solutions import print_solutions
-from src.solve import solve_third_degree
-from src.utils import exact_isqrt, is_integer, sqrt_fraction
+from srcv1.parse_equation import parse_equation
+from srcv1.print_solutions import print_solutions
+from srcv1.solve import solve_third_degree
+from srcv1.utils import exact_isqrt, is_integer, sqrt_fraction
 
 
 def __is_complex_close(a, b):

@@ -1,4 +1,4 @@
-from src.utils import sqrt_fraction
+from srcv1.utils import sqrt_fraction
 
 
 def solve_second_degree(reduced):
