@@ -1,6 +1,6 @@
 # computorv2
 
-## TODO
+## todo
 
 - [ ] remove v1/v2 separation (rename `srcv1`/`srcv2` to `src`)
 
