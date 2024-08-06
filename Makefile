@@ -1,3 +1,6 @@
+all:
+	@python computorv2.py
+
 test:
 	@pytest -rA -vv
 
