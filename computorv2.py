@@ -11,17 +11,6 @@ PROMPT_START_IGNORE = "\001"
 PROMPT_END_IGNORE = "\002"
 
 
-def input_swallowing_interrupt(_input):
-    def _input_swallowing_interrupt(*args):
-        try:
-            return _input(*args)
-        except KeyboardInterrupt:
-            print("^C")
-            return "\n"
-
-    return _input_swallowing_interrupt
-
-
 class ComputorShell(cmd.Cmd):
     prompt = f"{PROMPT_START_IGNORE}{BOLD}{CYAN}{PROMPT_END_IGNORE}computorv2>{PROMPT_START_IGNORE}{RESET}{PROMPT_END_IGNORE} "
 
@@ -30,6 +19,16 @@ class ComputorShell(cmd.Cmd):
         self.variables = dict()
 
     def cmdloop(self, *args, **kwargs):
+        def input_swallowing_interrupt(_input):
+            def _input_swallowing_interrupt(*args):
+                try:
+                    return _input(*args)
+                except KeyboardInterrupt:
+                    print("^C")
+                    return "\n"
+
+            return _input_swallowing_interrupt
+
         old_input_fn = cmd.__builtins__["input"]
         cmd.__builtins__["input"] = input_swallowing_interrupt(old_input_fn)
         try:
@@ -50,9 +49,14 @@ class ComputorShell(cmd.Cmd):
         if arg == "EOF":
             return True
         try:
-            var_name, value = map(str.strip, arg.split("=", 1))
-            self.variables[var_name.lower()] = int(value)
-        except ValueError:
+            var_name, value = map(str.strip, arg.lower().split("=", 1))
+            assert (
+                all(map(str.isalpha, var_name))
+                and len(var_name) >= 1
+                and var_name != "i"
+            )
+            self.variables[var_name] = int(value)
+        except (AssertionError, ValueError):
             print("Invalid command or assignment")
 
 

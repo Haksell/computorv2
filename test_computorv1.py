@@ -1,5 +1,5 @@
 import math
-from computor import print_reduced_form
+from computorv1 import print_reduced_form
 from decimal import Decimal
 from fractions import Fraction
 from math import sqrt
