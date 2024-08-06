@@ -1,5 +1,9 @@
 # computorv2
 
+## TODO
+
+- [ ] remove v1/v2 separation (rename `srcv1`/`srcv2` to `src`)
+
 ## general presentation
 
 - [ ] support for rational numbers
