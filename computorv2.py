@@ -42,6 +42,8 @@ class ComputorShell(cmd.Cmd):
 
     def do_vars(self, _):
         """vars : list all variables and their values"""
+        if not self.variables:
+            print("No variables in memory")
         for k, v in sorted(self.variables.items()):
             print(f"{k} = {v}")
 
