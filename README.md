@@ -8,7 +8,8 @@
 - [ ] assignment of an expression to a variable by type inference
 - [ ] reassignment of an existing variable with an expression of another type
 - [ ] assignment of a variable to another variable (existing or not)
-- [ ] resolution of a mathematical expression with or without defined variables
+- [ ] resolution of a mathematical expression with defined variables
+- [ ] resolution of a mathematical expression without defined variables
 - [ ] support and resolution of an equation of degree less than or equal to 2
 - [ ] operations between types, as much as possible (???)
 - [x] exit the program itself (`exit` or `ctrl+d`)
