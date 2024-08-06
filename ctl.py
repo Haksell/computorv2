@@ -1,6 +1,5 @@
 import cmd
 import os
-import readline
 
 
 RESET = "\033[0m"
@@ -26,6 +25,10 @@ def input_swallowing_interrupt(_input):
 class ComputorShell(cmd.Cmd):
     prompt = f"{PROMPT_START_IGNORE}{BOLD}{CYAN}{PROMPT_END_IGNORE}computorv2>{PROMPT_START_IGNORE}{RESET}{PROMPT_END_IGNORE} "
 
+    def __init__(self):
+        super().__init__()
+        self.variables = dict()
+
     def cmdloop(self, *args, **kwargs):
         old_input_fn = cmd.__builtins__["input"]
         cmd.__builtins__["input"] = input_swallowing_interrupt(old_input_fn)
@@ -34,30 +37,26 @@ class ComputorShell(cmd.Cmd):
         finally:
             cmd.__builtins__["input"] = old_input_fn
 
-        self.old_completer = readline.get_completer()
-        readline.set_completer(self.complete)
-        readline.parse_and_bind(self.completekey + ": complete")
-        old_delims = readline.get_completer_delims()
-        readline.set_completer_delims(old_delims.replace("-", ""))
+    def do_exit(self, _):
+        """exit : exit the program"""
+        return True
+
+    def do_vars(self, _):
+        """vars : list all variables and their values"""
+        for k, v in sorted(self.variables.items()):
+            print(f"{k} = {v}")
 
     def default(self, arg):
         if arg == "EOF":
-            print()
             return True
-        else:
-            print(f"{arg.split()[0]}: command not found")
-
-    def do_exit(self, _):
-        """exit : exit the taskmaster shell"""
-        return True
-
-    # TODO: remove
-    def do_ooga(self, arg):
-        """ooga : chaka"""
-        print(arg + " yourself" if arg else "chaka")
+        try:
+            var_name, value = map(str.strip, arg.split("=", 1))
+            self.variables[var_name.lower()] = int(value)
+        except ValueError:
+            print("Invalid command or assignment")
 
 
-if __name__ == "__main__":
+def main():
     INTRO_CHAR = "="
     width = os.get_terminal_size().columns
     top_line = INTRO_CHAR * width
@@ -65,3 +64,7 @@ if __name__ == "__main__":
     intro = f"{BOLD}{GREEN}{top_line}\n{middle_line}\n{top_line}{RESET}"
     ComputorShell().cmdloop(intro)
     print("Goodbye.")
+
+
+if __name__ == "__main__":
+    main()
