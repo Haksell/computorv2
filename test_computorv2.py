@@ -1,4 +1,4 @@
-from srcv2 import tokenize
+from srcv2.tokenize import tokenize, Token
 from srcv2.types import Rational
 
 
@@ -64,9 +64,13 @@ funA(funB(x)) = ?
 def test_rational():
     assert Rational(0, 1) == Rational(0, 1)
     assert Rational(21, 14) == Rational(3, 2)
-    assert Rational(21, 14).numer == 3
-    assert Rational(21, 14).denom == 2
+    assert Rational(21, -14).numer == -3
+    assert Rational(21, -14).denom == 2
+    assert Rational(43, 10) == Rational(-43, -10)
+    assert Rational(43, -10) == Rational(-43, 10)
 
 
 def test_tokenize():
-    assert tokenize("varA = 2") == ["varA", "=", Rational(2, 1)]
+    assert tokenize("varA = 2") == ["vara", Token.EQUALS, Rational(2, 1)]
+    assert tokenize("varB=  4.242    ") == ["varb", Token.EQUALS, Rational(2121, 500)]
+    assert tokenize("   varC =-4.3") == ["varc", Token.EQUALS, Rational(-43, 10)]

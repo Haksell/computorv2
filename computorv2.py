@@ -1,6 +1,6 @@
 import cmd
 import os
-from srcv2 import tokenize
+from srcv2.tokenize import tokenize
 
 
 RESET = "\033[0m"
